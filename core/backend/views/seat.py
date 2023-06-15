@@ -59,6 +59,7 @@ class CreateUpdateSeat(PermissionRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         seat_id = request.POST.get('seat_id')
         vehicle_id = request.POST.get('vehicle_id')
+        seat_num = request.POST.get('seat_num')
         if request.user.is_staff or request.user.is_superuser:
             vehicle = Vehicle.objects.filter(id=vehicle_id).first()
         elif request.user.is_agency_admin:
@@ -87,10 +88,11 @@ class CreateUpdateSeat(PermissionRequiredMixin, View):
             # it's a new seat - create seat
             form = SeatForm(request.POST, request.FILES)
             if form.is_valid():
-                seat = form.save(commit=False)
-                seat.vehicle = vehicle
-                seat.save()
-                messages.success(request, 'New Seat Created Successfully.')  # noqa
+                total_seats = int(seat_num)
+
+                for seat_n in range(1, total_seats + 1):
+                    Seat.objects.create(seat_num=seat_n, vehicle=vehicle)
+                messages.success(request, 'New Seats Created Successfully.')  # noqa
                 return redirect('backend:seats')
             else:
                 for field, error in form.errors.items():

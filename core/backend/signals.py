@@ -65,7 +65,7 @@ def notify_admins_and_agency(sender, instance, created, **kwargs):
     agency_admins = User.objects.filter(agency=instance)
     nums = [str(agency_admin.phone).strip() for agency_admin in agency_admins]
     nums.append(str(instance.phone))
-    nums.append("0558366133")
+    nums.append("0545065461")
     if created:
         subject = "New Agency Sign-up."
         message = "Hey there! \nThere is a new agency sign-up. \nKindly confirm and approve!"
@@ -73,23 +73,23 @@ def notify_admins_and_agency(sender, instance, created, **kwargs):
         agency_info = name + ' ' + contact + ' ' + email + ' \n'
         body = subject.upper() + ' \n\n' + message
         content = body + ' \n\n' + 'FROM: \n' + agency_info
-        send_sms("EasyGo", content, ["0558366133", "0546573849", "0243555025", "0545065461"])  # noqa
+        send_sms("RideMate", content, ["0545065461", "0549433446"])  # noqa
         # for agencies
-        message = "Hey there! \nWe have received your application to transact with EasyGo Trasport.\nWe are doing our due deligence and will get your agency approved as soon as possible."
+        message = "Hey there! \nWe have received your application to transact with RideMate Trasport.\nWe are doing our due deligence and will get your agency approved as soon as possible."
         agency_info = name + ' ' + contact + ' ' + email + ' \n'
         body = subject.upper() + ' \n\n' + message
         content = body + ' \n\n' + 'AGENCY INFO: \n' + agency_info
-        send_sms("EasyGo", content, nums)
+        send_sms("RideMate", content, nums)
     else:
         if instance.is_approved:
             # for agencies
-            message = "Congratulations! \nYour application to transact on EasyGO has been approved. \nKindly log onto the portal to start transacting."
+            message = "Congratulations! \nYour application to transact on RideMate has been approved. \nKindly log onto the portal to start transacting."
             subject = "Agency Approved!"
             agency_info = name + ' ' + contact + ' ' + email + ' \n'
             body = subject.upper() + ' \n\n' + message
             content = body + ' \n\n' + 'AGENCY INFO: \n' + agency_info
             try:
-                send_sms("EasyGo", content, nums)
+                send_sms("RideMate", content, nums)
             except Exception as e:
                 print(e)
             finally:
