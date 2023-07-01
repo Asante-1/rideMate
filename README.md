@@ -36,7 +36,7 @@ Backend and api services for a flight/trip booking application. This application
 # Installation
 1. Step One: <br />
 Clone the repository <br />
-```git clone https://github.com/DevPrinceK/flight.git```
+
 
 2. Step 2 <br />
 Navigate to project <br />
