@@ -49,11 +49,11 @@ class RegisterAgencyView(View):
                     # if user:
                     #     login(request, user)
                     #     messages.success(
-                    #         request, f"Hello {user.first_name}, Welcome to EasyGo!")
+                    #         request, f"Hello {user.first_name}, Welcome to Ridemate")
                     #     return redirect("backend:backend")
                     # else:
                     #     return HTTPResponse("Something went wrong! Contact admins.")
-                    messages.info(request, "Request Submitted Successfully")
+                    messages.info(request, "Request Submitted Successfully. Your details are under review. You will be contacted soon.")
                     return redirect("accounts:login")
         messages.success(request, "Agency Not Created Contact Admins!")
         return redirect("accounts:login")
