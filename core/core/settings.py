@@ -130,7 +130,7 @@ ARKESEL_API_KEY = os.getenv('ARKESEL_API_KEY', 'OkhnOUlLV1FhSlpLQktXN0M=')
 # email settings
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'easygo1online@gmail.com')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD', 'jbmtbeiwnclkshvp')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'ridemate81@gmail.com')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD', 'jvlrgqvtcoysgyaf')
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False

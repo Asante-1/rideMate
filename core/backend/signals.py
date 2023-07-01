@@ -65,7 +65,7 @@ def notify_admins_and_agency(sender, instance, created, **kwargs):
     agency_admins = User.objects.filter(agency=instance)
     nums = [str(agency_admin.phone).strip() for agency_admin in agency_admins]
     nums.append(str(instance.phone))
-    nums.append("0545065461")
+    nums.append("0549433446")
     if created:
         subject = "New Agency Sign-up."
         message = "Hey there! \nThere is a new agency sign-up. \nKindly confirm and approve!"
