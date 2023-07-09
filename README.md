@@ -1,4 +1,4 @@
-# Flight Booking App
+# RideMate Booking App
 Backend and api services for a flight/trip booking application. This application contains the api (to be integrated to mobile apps) that enables one to book and filght, make payments, search for available flights/trips etc. It also contains the backend dashboard for the travel agencies and administrators of the system to manage the entire system. With the backend, admins and agencies can:  <br />
 1. Manage agencies  <br />
   a. create agencies  <br />
@@ -40,15 +40,17 @@ Clone the repository <br />
 
 2. Step 2 <br />
 Navigate to project <br />
-```cd ./flight```
+```cd ./RideMain-main```
 
 3. Step 3 <br />
 Create Virtual Environment <br />
-```python -m venv venv``` <br />
+```python -m venv myenv``` <br />
 Navigate to the virtual env and activate it. <br />
-```cd ../venv``` <br />
+```cd ../myenv``` <br />
 Activate it <br />
 ```Scripts/activate``` <br />
+Activate it <br />
+```source bin/activate``` <br />
 Navigate back to core of the project. <br />
 ```cd ..``` <br />
 
