@@ -316,28 +316,28 @@ class PayForTripAPI(APIView):
 
             transaction_is_successful = False
             for i in range(6):
-                time.sleep(5)
+                time.sleep(20)
                 transaction_status = get_transaction_status(transaction_id)  # noqa
                 print(transaction_status)
                 if transaction_status['success'] == True:
                     transaction_is_successful = True
                     print('the transaction was successful')
-                    break
-
-            transaction = {
-                'transaction_id': transaction_id,
-                'external_id': "",
-                'amount': serializer['amount'].value,
-                'source_phone': serializer['source_phone'].value,
-                'network': serializer['network'].value,
-                'note': 'Payment for booking service',
-                'status_code': transaction_status['status_code'],
-                'status_message': transaction_status['message'],
-                'booking': booking,
-                'transaction_type': "CashIn",
-            }
-            print("Saving Transaction")
-            transaction = Transaction.objects.create(**transaction)
+                    transaction = {
+                        'transaction_id': transaction_id,
+                        'external_id': "",
+                        'amount': serializer['amount'].value,
+                        'source_phone': serializer['source_phone'].value,
+                        'network': serializer['network'].value,
+                        'note': 'Payment for booking service',
+                        'status_code': transaction_status['status_code'],
+                        'status_message': transaction_status['message'],
+                        'booking': booking,
+                        'transaction_type': "CashIn",
+                    }
+                    print("Saving Transaction")
+                    transaction = Transaction.objects.create(**transaction)
+                else:
+                    return
             # credit agency account if transaction is successful
             if transaction_is_successful:
                 try:
