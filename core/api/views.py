@@ -319,7 +319,7 @@ class PayForTripAPI(APIView):
                 time.sleep(20)
                 transaction_status = get_transaction_status(transaction_id)  # noqa
                 print(transaction_status)
-                if transaction_status['success'] == True:
+                if transaction_status['success'] == False:
                     transaction_is_successful = True
                     print('the transaction was successful')
                     transaction = {
