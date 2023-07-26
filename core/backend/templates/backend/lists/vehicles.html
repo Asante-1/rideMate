@@ -1,0 +1,92 @@
+{% extends 'backend/base.html' %}
+
+{% block active_item %}vehicles{% endblock %}
+{% block page_title %}Vehicles{% endblock %}
+
+
+{% block content %}
+<div class="breadcrumb" style="background-color:#B9B9BA ;">
+    <a href="{% url 'backend:backend' %}"> <font color ="black">Dashboard</font></a>
+    <a class="active"> <font color ="black"><i class="bi bi-chevron-right"></font></i> <font color ="black">Vehicles</font></a>
+</div>
+
+
+<div class="p-3">
+    <h4 class="page-header"> <font color ="white"><i class="bi bi-sliders me-2"></i></font><font color ="black"> Vehicles</font></h4>
+    <div class="row">
+        <section class="col-md-12 mt-3">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <h5 class="card-title"><span>All Vehicles</span></h5>
+                    <div class="actions">
+                        <a href="{% url 'backend:create_update_vehicle' %}" class="btn btn-dark-primary text-black"><i
+                                class="bi bi-plus"></i> Add
+                            Vehicle</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-sm data-table col-12" id="Vehicles" style="min-width: 60em;">
+                        <caption>List of Vehicles</caption>
+                        <thead>
+                            <tr>
+                                <th>#.</th>
+                                <th>VIN</th>
+                                <th>VEHICLE NAME</th>
+                                <th>CATEGORY</th>
+                                <th>AGENCY</th>
+                                <th>DATE ADDED</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if vehicles %}
+                            {% for vehicle in vehicles %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{vehicle.vin|upper}}</td>
+                                <td>{{vehicle.name}}</td>
+                                <td>{{vehicle.category.name}}</td>
+                                <td>{{vehicle.agency.name}}</td>
+                                <td>{{vehicle.date_created|date:"d M Y"}}</td>
+                                <td class="text text-center d-flex">
+                                    <a href="{% url 'backend:create_update_vehicle' %}?vehicle_id={{vehicle.id}}"
+                                        class="px-2">
+                                        <button class="btn btn-sm btn-primary">
+                                            <i class="bi bi-pencil"></i>
+                                            Edit
+                                        </button>
+                                    </a>
+
+                                    <form action="{% url 'backend:delete_vehicle' %}" method="POST"
+                                        class="requires-confirmation"
+                                        data-message="Click on okay to permanently delete this vehicle.">
+                                        <input type="hidden" name="vehicle_id" value="{{vehicle.id}}">
+                                        {% csrf_token %}
+                                        <button class="btn btn-sm btn-danger">
+                                            <i class="bi bi-trash"></i>
+                                            Delete
+                                        </button>
+                                    </form>
+
+                                    <a href="{% url 'backend:free_vehicle_seats' %}?vehicle_id={{vehicle.id}}"
+                                        class="px-2">
+                                        <button class="btn btn-sm btn-secondary">
+                                            Free Seats
+                                        </button>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="7" class="text-center">No Vehicles Found</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}

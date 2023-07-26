@@ -1,0 +1,83 @@
+{% extends 'backend/base.html' %}
+
+{% block active_item %}categories{% endblock %}
+{% block page_title %}Categories{% endblock %}
+
+
+{% block content %}
+<div class="breadcrumb"style="background-color:#B9B9BA ;">
+    <a href="{% url 'backend:backend' %}"> <font color ="black">Dashboard</font></a>
+    <a class="active"><i class="bi bi-chevron-right"></i>  <font color ="black">Categories</font></a>
+</div>
+
+<div class="p-3">
+    <h4 class="page-header"><i class="bi bi-sliders me-2"></i>  <font color ="black">Categories</font></h4>
+    <div class="row">
+        <section class="col-md-12 mt-3">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <h5 class="card-title"><span>All Categories</span></h5>
+                    <div class="actions">
+                        <a href="{% url 'backend:create_update_category' %}"
+                            class="btn btn-dark-primary text-black"><i class="bi bi-plus"></i> Add
+                            Category</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-sm data-table col-12" id="Categories" style="min-width: 60em;">
+                        <caption>List of Categories</caption>
+                        <thead>
+                            <tr>
+                                <th>#.</th>
+                                <th>Category Name</th>
+                                <th>Date Created</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if categories %}
+                            {% for category in categories %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{category.name}}</td>
+                                <td>{{category.date_created|date:"D d M Y"}}</td>
+                                <td class="text text-center d-flex">
+                                    <a href="{% url 'backend:create_update_category' %}?category_id={{category.id}}"
+                                        class="px-2">
+                                        <button class="btn btn-sm btn-primary">
+                                            <i class="bi bi-pencil"></i>
+                                            Edit
+                                        </button>
+                                    </a>
+
+                                    <form action="{% url 'backend:delete_category' %}" method="POST"
+                                        class="requires-confirmation"
+                                        data-message="Click on okay to permanently delete this candidate.">
+                                        <input type="hidden" name="category_id" value="{{category.id}}">
+                                        {% csrf_token %}
+                                        <button class="btn btn-sm btn-danger">
+                                            <i class="bi bi-trash"></i>
+                                            Delete
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td colspan="4" class="text-center">No Categories Found</td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+
+
+
+
+{% endblock %}

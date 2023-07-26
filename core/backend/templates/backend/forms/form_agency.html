@@ -1,0 +1,97 @@
+<form action="" class="needs-validation my-4" enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="agency_id" value="{{agency.id}}">
+
+    <div class="form-group mt-3">
+        <label for="fullname">Agency Name <span class="text text-danger">*</span></label>
+        <input class="form-control" placeholder="E.g. RideMate Travel And Tour" value="{{agency.name}}" type="text"
+            name="name" id="name" required>
+        <div class="invalid-feedback">
+            Please this field is required.
+        </div>
+    </div>
+
+    <div class="form-group mt-3">
+        <label for="index_number">Agency Address<span class="text text-danger">*</span></label>
+        <input class="form-control" placeholder="E.g. Accra, Ghana" value="{{agency.address}}" type="text"
+            name="address" id="address" required>
+        <div class="invalid-feedback">
+            Please this field is required.
+        </div>
+    </div>
+
+    <div class="form-group mt-3">
+        <label for="phone">Phone <span class="text text-danger">*</span></label>
+        <input class="form-control" placeholder="E.g. 0545065461" value="{{agency.phone}}" type="text" name="phone"
+            id="phone" required>
+        <div class="invalid-feedback">
+            Please this field is required.
+        </div>
+    </div>
+    <div class="form-group mt-3">
+        <label for="website">Website <span class="text text-danger">*</span></label>
+        <input class="form-control" placeholder="E.g. www.ridemate.com" value="{{agency.website}}" type="text"
+            name="website" id="website" required>
+        <div class="invalid-feedback">
+            Please this field is required.
+        </div>
+    </div>
+    <div class="form-group mt-3">
+        <label for="email">Email <span class="text text-danger">*</span></label>
+        <input class="form-control" placeholder="E.g. ridemate@gmail.com" value="{{agency.email}}" type="email"
+            name="email" id="email" required>
+        <div class="invalid-feedback">
+            Please this field is required.
+        </div>
+    </div>
+    <div class="form-group mt-3">
+        <label for="business_certificate">Business Certificate <span class="text text-danger">*</span> <span
+                class="text-primary">Upload picture of business certificate for verification</span> </label>
+        {% if agency.business_certificate %}
+        <br>
+        <span>Current File: </span>
+        <div class="">
+            <img src="{{agency.business_certificate.url}}" alt="" style="height: 70px; width:auto;">
+        </div>
+        {% endif %}
+        <input class="form-control" type="file" accept="image/*" name="business_certificate"
+            {% if not agency.business_certificate %} required {% endif %}>
+        <div class="invalid-feedback">
+            Please this field is required.
+        </div>
+    </div>
+    <div class="form-group mt-3">
+        <label for="contact_person_ID">Agency Admin's ID <span class="text text-danger">*</span> <span
+                class="text-primary">Upload picture of Ghana card</span> </label>
+        {% if agency.contact_person_ID %}
+        <br>
+        <span>Current File: </span>
+        <div class="">
+            <img src="{{agency.contact_person_ID.url}}" alt="" style="height: 70px; width:auto;">
+        </div>
+        {% endif %}
+        <input class="form-control" type="file" accept="image/*" name="contact_person_ID"
+            {% if not agency.business_certificate %} required {% endif %}>
+        <div class="invalid-feedback">
+            Please this field is required.
+        </div>
+    </div>
+    {% if request.user.is_staff or request.user.is_superuser %}
+    <div class="form-group mt-3">
+        <label for="agency_admin">Agency Administrator <span class="text text-danger">*</span></label>
+        <select name="agency_admin" id="agency_admin" class="form-control">
+            <option value="">Select Agency</option>
+            {% for admin in admins %}
+            <option value="{{admin.id}}" {% if admin.id == user.id %} selected {% endif %}>
+                {{admin.first_name}} - {{admin.email}}</option>
+            {% endfor %}
+        </select>
+        <div class="invalid-feedback">
+            Please this field is required.
+        </div>
+    </div>
+    {% endif %}
+    <div class="form-group my-3">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
