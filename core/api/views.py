@@ -352,4 +352,3 @@ class PayForTripAPI(APIView):
             return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
         # if transaction data is not valid
         return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
-

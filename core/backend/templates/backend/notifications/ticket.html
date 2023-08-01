@@ -1,3 +1,99 @@
+{% comment %} <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>User ticket</title>
+    <meta name="viewport" content="width=device-width,
+      initial-scale=1.0"/>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="form-title">RideMate Receipt</h1>
+      <form action="#">
+        <div class="main-user-info">
+          <div class="user-input-box">
+            <label for="Agency">Agency</label>
+            <input type="text"
+                    id="Agency"
+                    name="Agency"
+                    value={{ticket.transaction.booking.trip.vehicle.agency.name}}
+                    readonly />
+          </div>
+          <div class="user-input-box">
+            <label for="Source">Source</label>
+            <input type="text"
+                    id="Source"
+                    name="Source"
+                    value={{ticket.transaction.booking.trip.source}}
+                    readonly />
+          </div>
+          <div class="user-input-box">
+            <label for="Destination">Destination</label>
+            <input type="Destination"
+                    id="Destination"
+                    name="Destination"
+                    value={{ticket.transaction.booking.trip.destination}}
+                    readonly />
+          </div>
+          <div class="user-input-box">
+            <label for="price">Price</label>
+            <input type="text"
+                    id="price"
+                    name="price"
+                    value={{ticket.transaction.booking.trip.price}}
+                    readonly />
+          </div>
+          <div class="user-input-box">
+            <label for="date">Date</label>
+            <input type="text"
+                    id="date"
+                    name="date"
+                    value={{ticket.transaction.booking.trip.date}}
+                    readonly />
+          </div>
+          <div class="user-input-box">
+            <label for="date">Time</label>
+            <input type="text"
+                    id="time"
+                    name="date"
+                    value={{ticket.transaction.booking.trip.time}}
+                    readonly  />
+          </div>
+          <div class="user-input-box">
+            <label for="ticketid">TicketID</label>
+            <input type="ticketid"
+                    id="ticketid"
+                    name="ticketid"
+                    value={{ticket.ticket_id}}
+                    readonly  />
+          </div>
+          <div class="user-input-box">
+            <label for="seat number">Seat Number(s)</label>
+            <input type="seat number"
+                    id="seat number"
+                    name="seat number"
+                    value={{ticket.transaction.booking.get_seat_numbers}}
+                    readonly  />
+          </div>
+        </div>
+        
+        
+        <div class="gender-details-box">
+          <span class="gender-title">Important Notice</span>
+          <div class="gender-category">
+          <p>Please ensure you arrive with a minimum of 30 minutes prior to the trip. Your cooperation is appreciated.
+            Email as : ridemate81@gmail.com
+          </p>
+          </div>
+        </div>
+        <!-- <div class="form-submit-btn">
+          <input type="submit" value="Register">
+        </div> -->
+      </form>
+    </div>
+  </body>
+</html> {% endcomment %}
 
 <!DOCTYPE html>
 {% load static %}
